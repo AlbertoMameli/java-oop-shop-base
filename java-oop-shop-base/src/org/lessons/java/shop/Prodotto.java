@@ -4,16 +4,17 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Prodotto {
-    public int codice;
-    public String nome;
-    public String descrizione;
-    public float prezzo;
-    public float iva;
+    //Attributi, campi, variabili d'istanza
+    private int codice;
+    private String nome;
+    private String descrizione;
+    private float prezzo;
+    private float iva;
 
     // costruttore
-    public Prodotto(int codice, String nome, String descrizione, float prezzo, float iva) {
+    public Prodotto(String nome, String descrizione, float prezzo, float iva) {
         this.codice = generaCodiceRandom();
-        this.nome = nome;
+        setNome(nome); // cosi posso scrivere direttamente il nome già con i miei controlli
         this.descrizione = descrizione;
         this.prezzo = prezzo;
         this.iva = iva;
@@ -36,9 +37,8 @@ public class Prodotto {
         return prezzo + (prezzo * iva / 100);
 
     }
-    
 
-    //metodo per prezzo formattato 
+    // metodo per prezzo formattato
 
     public String getPrezzoFormattatoConIva() {
         DecimalFormat prezzoFormattato = new DecimalFormat("0.00");
@@ -49,30 +49,40 @@ public class Prodotto {
     public String getNomeEsteso() {
         return codice + "-" + nome;
     }
-    /*
-     * Se imposto gli attributi private allora mi serviranno
-     * getter
-     * public int getCodice() {
-     * return codice;
-     * }
-     * 
-     * 
-     * 
-     * public String getNome() {
-     * return nome;
-     * }
-     * 
-     * public String getDescrizione() {
-     * return descrizione;
-     * }
-     * 
-     * public float getPreazzo() {
-     * return prezzo;
-     * }
-     * 
-     * public float getIva() {
-     * return iva;
-     * }
-     */
+
+    // getter
+    public int getCodice() {
+        return codice;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public float getPrezzo() {
+        return prezzo;
+    }
+
+    public float getIva() {
+        return iva;
+    }
+
+    // setter
+
+    public void setNome(String nome) {
+
+        if (nome != null && nome.length() > 0){
+            // nomeFormattato 
+        this.nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
+        } else {
+            System.out.println("Inserisci un nome valido");
+            this.nome = "X";
+        }
+        
+    }
 
 }
